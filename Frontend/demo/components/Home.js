@@ -1,111 +1,123 @@
-
-import { View, Text, SafeAreaView ,StyleSheet,ScrollView,TouchableOpacity,Image} from 'react-native'
+import { View, Text ,StyleSheet,ScrollView,TouchableOpacity,Button} from 'react-native'
 import {React,useState,useEffect} from 'react'
-import { style } from '@mui/system';
 import axios from 'axios';
+import { Input } from '@material-ui/core';
+import { borderColor, style } from '@mui/system';
+import { SpaceBar } from '@mui/icons-material';
+import EmpCard from './EmpCard';
+
+const Home = ({navigation}) => {
 
 
-
-
-
-
-
-const Home = (props) => {
-  async function deleteEmployee(){
-    axios.delete(`http://localhost:3000/employees/${props.id}`,{
-     "_id":props.id,
-    })
-     .then(function (response) {
-       console.log(response);
-     })
-     .catch(function (error) {
-       console.log(props.id);
-       console.log(error);
-     });
-   }
-   async function updateEmployee(){
-
-    
-    axios.patch(`http://localhost:3000/employees/${props.id}`,{
-      "firstName":fname,
-      "lastName":lname,
-      "email":email,
-      "Empid":empid,
-      "contactNumber":"112234455667788"
-
-
-    })
-     .then(function (response) {
-       console.log(response);
-     })
-     .catch(function (error) {
-       console.log(`http://localhost:3000/employees/${id}`);
-       console.log(error);
-     });
-   }
-
-   
-
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get('http://localhost:3000/employees');
+        setData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, [data]);
   return (
-    <View style={styles.item}>
-      <View style={styles.itemLeft}>
-        <View style={styles.square}></View>
-        <Text style={styles.itemText}>Id-{props.empid} {props.name} {props.lastName}</Text>        
+    <View style={styles.container}>
+    <ScrollView
+      contentContainerStyle={{
+        flexGrow: 1
+      }}
+      keyboardShouldPersistTaps='handled'
+    >
+
+
+      <View style={styles.tasksWrapper}>
+        <Text style={styles.sectionTitle}>Employees List</Text>
+        <View style={styles.items}>
+          {
+            data.map((item, index) => {
+              return (
+                <View style={styles.section} key={index}  onPress={()=>{}}>
+                  <EmpCard Empid={data[index].Empid} firstName={data[index].firstName} lastName={data[index].lastName} 
+                  _id={data[index]._id}  contactNumber={data[index].contactNumber} email={data[index].email}/>
+                </View > 
+              )
+            })
+          }
+          
+        </View>
       </View>
-      <TouchableOpacity onPress={deleteEmployee} ><Image style={styles.circular} source={require('../assets/delete.png')}/></TouchableOpacity>
-      <TouchableOpacity onPress={updateEmployee} ><Image style={styles.circular} source={require('../assets/pencil.png')}/></TouchableOpacity>
-     
-
-  
-
-
-
-    </View>
+      <Button title="Add Employee" onPress={() => navigation.navigate('CreateEmployee')}/>
+    </ScrollView>
+  </View>
   )
 }
-
-const styles = StyleSheet.create({
-    item: {
-      backgroundColor: '#FFF',
-      padding: 15,
-      borderRadius: 10,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      marginBottom: 20,
-    },
-    itemLeft: {
-      flexDirection: 'row',
-      flexWrap: 'wrap'
-    },
-    square: {
-      display:'flex',
-      alignItems:'center',
-      alignContent:'center',
-      width: 24,
-      height: 24,
-      backgroundColor: '#55BCF6',
-      opacity: 0.4,
-      borderRadius: 5,
-      marginRight: 15,
-    },
-    itemText: {
-      maxWidth: '80%',
-    },
-    circular: {
-      width: 15,
-      height: 15,
-      // borderColor: '#55BCF6',
-      // borderWidth: 1,
-      // borderRadius: 3,
-    },
-    itemText2: {
-      maxWidth: '80%',
-      fontSize:10,
-    },
-   
-  });
-  
-
 export default Home
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#E8EAED',
+  },
+  tasksWrapper: {
+    paddingTop: 80,
+    paddingHorizontal: 20,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: 'bold'
+  },
+  items: {
+    marginTop: 30,
+  },
+  writeTaskWrapper: {
+    position: 'absolute',
+    bottom: 60,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  input: {
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    marginBottom:10,
+    backgroundColor: '#FFF',
+    borderRadius: 10,
+    borderColor: '#C0C0C0',
+    borderWidth: 1,
+    width: 350,
+  },
+  addWrapper: {
+    width: 60,
+    height: 60,
+    backgroundColor: '#FFF',
+    borderRadius: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: '#C0C0C0',
+    borderWidth: 1,
+  },
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#C0D4D8',
+    padding: 10,
+  },
+  temp:{
+    height:100,
+  },
+  actions:{
+    display:"flex",
+    alignItems:"center",
+    flexDirection:'row',
+    justifyContent:'space-around'
+
+  },
+  section:{
+    height:70,
+
+    borderColor:'red',
+    borderRadius:10,
+  },
+  addText: {},
+});
 
