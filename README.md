@@ -1,10 +1,33 @@
+
+## Run Locally
+
+Clone the project
 Frontend-Rect Native
 Backend-Mongo DB , Node JS, Express JS
 
-To run this project
-1.npm run dev - to start backed server
-2.npm run ios- to run ios simpulator
-3.npm run android - to run android simulator
+
+```bash
+  git clone https://link-to-project
+```
+
+Run backend 
+
+```bash
+  cd Backend
+  npm npm run dev
+```
+
+Start the emulator
+
+```bash
+  npm run ios
+  npm run android
+```
+
+
+
+
+
 
 
 Demo Link1-
