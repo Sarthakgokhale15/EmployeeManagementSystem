@@ -1,10 +1,8 @@
-
-## Run Locally
-
-Clone the project
 Frontend-Rect Native
 Backend-Mongo DB , Node JS, Express JS
 
+
+## Run Locally
 
 ```bash
   git clone https://link-to-project
@@ -14,7 +12,7 @@ Run backend
 
 ```bash
   cd Backend
-  npm npm run dev
+  npm run dev
 ```
 
 Start the emulator
@@ -23,6 +21,62 @@ Start the emulator
   npm run ios
   npm run android
 ```
+
+## API Reference
+
+#### View all items
+
+```http
+  GET http://localhost:3000/employees
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| None | None | Returns JSON data of all employees |
+
+#### View item
+
+```http
+  GET http://localhost:3000/employees/${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `Integer` | **Required** Id of employee to fetch |
+
+#### Create item
+
+```http
+  POST http://localhost:3000/employees/
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `Integer`  | **Required** Id of employee to fetch |
+| `email`   | `string` |  Id of employee to fetch |
+| `contactNumber`      | `string` |  contact Number of  employee to fetch |
+| `firstName`      | `string` |  first name  of employee to fetch |
+| `lastName`      | `string` |  last name of employee to fetch |
+| `Empid`      | `Integer` |  Empid of employee to fetch |
+
+
+
+#### Update item
+
+```http
+  Patch http://localhost:3000/employees/${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `Integer`  | **Required** Id of employee to update |
+| `email`   | `string` |  Id of employee to update |
+| `contactNumber`      | `string` |  contact Number of  employee to update |
+| `firstName`      | `string` |  first name  of employee to update |
+| `lastName`      | `string` |  last name of employee to update |
+| `Empid`      | `Integer` |  Empid of employee to update |
+
+
 
 
 
