@@ -1,3 +1,12 @@
+Frontend-Rect Native
+Backend-Mongo DB , Node JS, Express JS
+
+To run this project
+1.npm run dev - to start backed server
+2.npm run ios- to run ios simpulator
+3.npm run android - to run android simulator
+
+
 Demo Link1-
 https://viitac-my.sharepoint.com/:v:/g/personal/sarthak_21910984_viit_ac_in/ETYKUOkBw_NDnr-xjH6dLCABDQ1pVn_hp9gQGXnLaKz11w?e=pw03Vy&wdLOR=c19FCADA0-278B-D74F-A663-FDF7D2B98334
 
